@@ -12,8 +12,8 @@ A version of Python >= 3.7 is required to use this package. We recommend using [
       
       `git clone https://github.com/UNC-Knight-Lab/peptoid-sequence-tools.git`
 
-      4. Install the package using pip. This command will install this package to your Python environment.
-          The package path should be `./seq_match` if cloned using git. Otherwise, replace `./seq_match` with the path to the unzipped package.
+   2. Install the package using pip. This command will install this package to your Python environment.
+       The package path should be `./seq_match` if cloned using git. Otherwise, replace `./seq_match` with the path to the unzipped package.
       
       `pip install ./seq_match`
 
