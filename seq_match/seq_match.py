@@ -31,7 +31,7 @@ def seq_match(input_folder, output_folder):
 def extract_data_from_folder(folder_name):
     print("Collecting data from folder " + folder_name)
 
-    peaks_list = []
+    peaks_list = [[]]
 
     for file in glob.iglob(folder_name + "/*.txt"):
         print(file)
@@ -163,8 +163,7 @@ def sequence_matching(peaks):
 
                     expected_inputs = ['G', 'B', 'G B']
                     while True:
-                        picked = input(
-                            "Enter 'G' to choose glycine, 'B' to choose N-butyl, or 'G B' to choose to branch: ")
+                        picked = input("Enter 'G' to choose glycine, 'B' to choose N-butyl, or 'G B' to choose to branch: ")
 
                         if picked in expected_inputs:
                             break
