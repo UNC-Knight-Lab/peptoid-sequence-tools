@@ -1,11 +1,9 @@
 import numpy as np
 import pandas as pd
 from itertools import groupby
+import glob
 
-################################################################
-###################### Global Variables ########################
-################################################################
-
+# Global Variables
 G = 57.02146  # mass of glycine
 B = 113.08406  # mass of N-butylglycine
 Na = 22.989218  # mass of sodium
@@ -15,38 +13,37 @@ ppm = [[]]  # allowed ppm error
 N = 20  # number of monomers
 
 
-################################################################
-######################## Main function #########################
-################################################################
-
-def seq_match():
+# Main Script Function
+def seq_match(input_folder, output_folder):
     print("Start evaluation.")
-    peaks = data_extraction()
+    peaks = extract_data_from_folder(input_folder)
+
+    if len(peaks) == 0:
+        print('No data found in input folder')
+        return
+
     y_ions = sequence_matching(peaks)
-    export_to_excel(y_ions)
+    export_to_excel(y_ions, output_folder)
     print("Evaluation complete.")
 
 
-################################################################
-##################### Data Import #######################
-################################################################
+# Extract peak data from txt files in specified folder
+def extract_data_from_folder(folder_name):
+    print("Collecting data from folder " + folder_name)
 
-def data_extraction():
-    print("Collecting data from folder...")
     peaks_list = []
 
-    peaks_list.append(np.loadtxt("/Users/suprajachittari/Documents/python_scripts/Erin/J21_2.txt"))
-    peaks_list.append(np.loadtxt("/Users/suprajachittari/Documents/python_scripts/Erin/J21_3.txt"))
-    peaks_list.append(np.loadtxt("/Users/suprajachittari/Documents/python_scripts/Erin/J21_4.txt"))
+    for file in glob.iglob(folder_name + "/*.txt"):
+        print(file)
+        peaks_list.append(np.loadtxt(file))
+
+    print(len(peaks_list), " .txt files found")
 
     peaks = np.concatenate(peaks_list)
     return peaks
 
 
-################################################################
-##################### Matching Functions #######################
-################################################################
-
+# Helper Matching Functions
 def match_two(curr_sum, peaks, i):
     two_diffs = []
     species = [G + G + Na, G + B + Na, B + B + Na]
@@ -102,10 +99,7 @@ def match_one(curr_sum, peaks, i):
     return diffs
 
 
-################################################################
-##################### Sequence matching function ###############
-################################################################
-
+# Sequence Matching from Peak Function
 def sequence_matching(peaks):
     print("Beginning sequence matching.")
     Y_ions = [[]]  # y-ions list
@@ -215,15 +209,12 @@ def sequence_matching(peaks):
     return Y_ions
 
 
-################################################################
-######################## Excel export ##########################
-################################################################
+# Export sequence match data to Excel
+def export_to_excel(y_ions, output_folder):
+    print("Exporting data to excel in directory " + output_folder)
+    writer = pd.ExcelWriter(output_folder + '/seq_1.xlsx', engine='xlsxwriter')
 
-def export_to_excel(Y_ions):
-    print("Exporting data to excel in directory.")
-    writer = pd.ExcelWriter('seq_1.xlsx', engine='xlsxwriter')
-
-    for i in range(len(Y_ions)):
-        df = pd.DataFrame(Y_ions[i])
+    for i in range(len(y_ions)):
+        df = pd.DataFrame(y_ions[i])
         df.to_excel(writer, sheet_name='Sheet{}'.format(i + 1))
     writer.save()

@@ -13,11 +13,12 @@ setup(
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     url='https://github.com/UNC-Knight-Lab/peptoid-sequence-tools',
-    packages=['seq_match'],
+    packages=find_packages(),
     install_requires=[
         'numpy',
         'pandas',
         'matplotlib',
+        'xlsxwriter'
     ],
     entry_points={
         'console_scripts': ['seq_match=seq_match.command_line:main'],
