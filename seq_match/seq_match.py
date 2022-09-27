@@ -161,21 +161,14 @@ def sequence_matching(peaks):
                         elif diffs[jj]["species"] == "B+Na":
                             B_candidates.append(diffs[jj])
 
+                    expected_inputs = ['G', 'B', 'G B']
                     while True:
-                        try:
-                            picked = input(
-                                "Enter 'G' to choose glycine, 'B' to choose N-butyl, or 'G B' to choose to branch:")
-                            if all(x.isalpha() or x.isspace() for x in picked):
-                                picked = list(map(str, picked.split(' ')))
-                                break
-                            else:
-                                raise TypeError
-                        except TypeError:
-                            print("Sorry. Please input either 'G', 'B', or 'G B'.")
-                            continue
-                        except EOFError:
-                            print("Sorry. Please input either 'G', 'B', or 'G B'.")
-                            continue
+                        picked = input(
+                            "Enter 'G' to choose glycine, 'B' to choose N-butyl, or 'G B' to choose to branch: ")
+
+                        if picked in expected_inputs:
+                            break
+                        print("Unexpected input. Please try again.")
 
                     minG = min(G_candidates, key=lambda x: x['difference'])
                     minB = min(B_candidates, key=lambda x: x['difference'])

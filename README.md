@@ -4,10 +4,16 @@
 This Python package was developed by the Knight Lab at UNC Chapel Hill to analyze the sequence of a peptoid from mass peaks in a MALDI-TOF spectrum. {more description}
 
 ## Installation Instructions
-A version of Python >= 3.7 is required to use this package. We recommend using Anaconda to install Python for those new to Python.
-1. Clone this repository or download the package from GitHub as a Zip file and unzip.
-   `git clone {}`
-2. From a terminal, run `pip install {path to package}`. This command will install this package to your Python environment.
+A version of Python >= 3.7 is required to use this package. We recommend using [Anaconda](https://www.anaconda.com) to install Python for those new to Python.
+1. Clone this repository (requires git to be installed) or download the package from GitHub as a Zip file and unzip.
+
+
+      git clone https://github.com/UNC-Knight-Lab/peptoid-sequence-tools.git
+
+2. Open the terminal (MacOS) or Command Line (Windows) and install the package using pip. This command will install this package to your Python environment.
+
+
+      pip install {path_to_this_package}
 
 That's it!
 
