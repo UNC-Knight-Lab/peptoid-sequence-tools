@@ -19,7 +19,7 @@ def seq_match(input_folder, output_folder):
     peaks = extract_data_from_folder(input_folder)
 
     if len(peaks) == 0:
-        print('No data found in input folder')
+        print('No data found in input folder. Ending Script')
         return
 
     y_ions = sequence_matching(peaks)
@@ -37,7 +37,7 @@ def extract_data_from_folder(folder_name):
         print(file)
         peaks_list.append(np.loadtxt(file))
 
-    print(len(peaks_list), " .txt files found")
+    print(len(peaks_list)-1, " .txt files found")
 
     peaks = np.concatenate(peaks_list)
     return peaks
@@ -104,7 +104,7 @@ def sequence_matching(peaks):
     print("Beginning sequence matching.")
     Y_ions = [[]]  # y-ions list
 
-    print("Appending linker mass to start of chain.")
+    print("Appending linker mass to start of chain.\n")
     # Append linker mass
     Y_ions[0].append({
         "position": 0,
@@ -139,11 +139,11 @@ def sequence_matching(peaks):
                     diffs_mult = match_two(curr_sum, peaks, i)
 
                     if len(diffs_mult) != 0:
-                        print("Single residuce matching failed. Pair residuce matching was success.")
+                        print("Single residuce matching failed. Pair residue matching was success.\n")
                         Y_ions[it].append(diffs_mult[0])
                         Y_ions[it].append(diffs_mult[1])
                     else:
-                        print("Single residue matching failed. Pair residue matching failed. The branch is dead.")
+                        print("Single residue matching failed. Pair residue matching failed. The branch is dead.\n")
 
                 # offer user input and branch to multiple sequence options
                 elif len(diffs_unique) > 1:
@@ -186,7 +186,7 @@ def sequence_matching(peaks):
 
                 # assign the only choice
                 else:
-                    print("Single matching success.")
+                    print("Single matching success.\n")
                     Y_ions[it].append(diffs_unique[0])
 
         # remove duplicate sequences
