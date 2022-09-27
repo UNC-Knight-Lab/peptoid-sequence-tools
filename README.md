@@ -24,13 +24,17 @@ That's it!
 The peptoid sequence matching tool can be run as a Python function or from the command line terminal.
 The script may prompt the user to make decisions in a tie-breaker scenario.
 
+The input folder is the folder where your peak data is stored as `.txt` files. All `.txt` files in the folder will be combined and used as input.
+This allows for multiple spectra of the same sample to be combined for better signal.
+Example peak data is included in this repository.
+
 Data will be output as a single Excel worksheet in the output folder.
 
 ### To run from terminal:
     
     seq_match -i "/path/to/input_folder" -o "/path/to/output_folder"
 
-Instead of specifying an input or output folder, you can also navigate to your data input folder in the terminal and run the script
+Instead of specifying an input or output folder, you can also navigate to your data input folder in the terminal and run the script.
 The current working directory will be used as default.
 Use the help `-h` tag to see more options.
 
