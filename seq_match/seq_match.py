@@ -16,14 +16,17 @@ N = 20  # number of monomers
 # Main Script Function
 def seq_match(input_folder, output_folder):
     print("Start evaluation.")
+
     peaks = extract_data_from_folder(input_folder)
 
     if len(peaks) == 0:
         print('No data found in input folder. Ending Script')
         return
 
-    y_ions = sequence_matching(peaks)
+    y_ions = match_peaks(peaks)
+
     export_to_excel(y_ions, output_folder)
+
     print("Evaluation complete.")
 
 
@@ -100,7 +103,7 @@ def match_one(curr_sum, peaks, i):
 
 
 # Sequence Matching from Peak Function
-def sequence_matching(peaks):
+def match_peaks(peaks):
     print("Beginning sequence matching.")
     Y_ions = [[]]  # y-ions list
 
