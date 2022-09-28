@@ -47,12 +47,15 @@ def extract_data_from_folder(folder_name):
 
 
 # Helper Matching Functions
+# {Short function description here}
 def match_two(curr_sum, peaks, i):
     two_diffs = []
     species = [G + G + Na, G + B + Na, B + B + Na]
+    # {Why are there duplicate lists?}
     species_label1 = ['G+Na', 'G or B', 'B+Na']
     species_label2 = ['G+Na', 'G or B', 'B+Na']
 
+    # {More descriptive loop variable names}
     for f in range(len(species)):
         for p in peaks:
             test_diff = p - curr_sum - species[f]
@@ -79,13 +82,14 @@ def match_two(curr_sum, peaks, i):
                 two_diffs.append(match2)
     return two_diffs
 
-
+# {Short function description here}
 def match_one(curr_sum, peaks, i):
     diffs = []
 
     species_label = ['G+Na', 'B+Na']
     species = [G + Na, B + Na]
 
+    # {more descriptive loop variable names}
     for f in range(len(species)):
         for p in peaks:
             test_diff = p - curr_sum - species[f]
@@ -118,10 +122,13 @@ def match_peaks(peaks):
         "no adduct": L
     })
 
+    # {more descriptive variable name "monomer"?}
     for i in range(N):  # iterate over all positions in chain
         tot = len(Y_ions)
         new_lists = []
         remove_nums = []
+
+        # {More descriptive variable name}
         for it in range(tot):
             if Y_ions[it][-1]["position"] == i:
                 print("Evaluating position", i + 1, "for sequence ", it + 1)
@@ -155,6 +162,7 @@ def match_peaks(peaks):
 
                     print("More than one sequence match was found. The following are the options:")
 
+                    # {More descriptive loop variable name}
                     for jj in range(len(diffs)):
                         print("Species", diffs[jj]["species"], "has difference", round(diffs[jj]["difference"], 4),
                               "picked peak:", round(diffs[jj]["picked peak"], 4), "target peak:",
@@ -177,6 +185,7 @@ def match_peaks(peaks):
 
                     copy_y = Y_ions[it].copy()
 
+                    # {More descriptive variable name}
                     for kk in range(len(picked)):
                         if picked[kk] == "G":  # assign G as the next position with the smallest ppm difference
                             new_lists.append(copy_y + [minG])
@@ -193,6 +202,7 @@ def match_peaks(peaks):
                     Y_ions[it].append(diffs_unique[0])
 
         # remove duplicate sequences
+        # {More descriptive variable name}
         for j in sorted(remove_nums, reverse=True):
             Y_ions.remove(Y_ions[j])
 
