@@ -1,0 +1,135 @@
+Start evaluation.
+Collecting data from folder ./seq_match/example_data
+./seq_match/example_data/I17_all.txt
+1  .txt files found
+Beginning sequence matching.
+Appending linker mass to start of chain.
+
+Evaluating position 1 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 2 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 3 for sequence  1
+Attempting single residue matching.
+More than one sequence match was found. The following are the options:
+Species G+Na has difference -0.117 picked peak: 1161.6146 target peak: 1161.7316
+Species G+Na has difference -0.1081 picked peak: 1161.6235 target peak: 1161.7316
+Species G+Na has difference -0.0638 picked peak: 1161.6678 target peak: 1161.7316
+Species G+Na has difference -0.1246 picked peak: 1161.6071 target peak: 1161.7316
+Species G+Na has difference -0.1364 picked peak: 1161.5952 target peak: 1161.7316
+Species B+Na has difference -0.1755 picked peak: 1217.6188 target peak: 1217.7942
+Enter 'G' to choose glycine, 'B' to choose N-butyl, or 'G B' to choose to branch: You picked  G
+Current number of sequences: 1
+Evaluating position 4 for sequence  1
+Attempting single residue matching.
+More than one sequence match was found. The following are the options:
+Species G+Na has difference -0.1238 picked peak: 1218.6293 target peak: 1218.7531
+Species G+Na has difference -0.1301 picked peak: 1218.623 target peak: 1218.7531
+Species G+Na has difference -0.1141 picked peak: 1218.639 target peak: 1218.7531
+Species G+Na has difference -0.1247 picked peak: 1218.6284 target peak: 1218.7531
+Species G+Na has difference -0.1312 picked peak: 1218.6219 target peak: 1218.7531
+Species B+Na has difference -0.1474 picked peak: 1274.6683 target peak: 1274.8157
+Species B+Na has difference -0.0678 picked peak: 1274.7479 target peak: 1274.8157
+Enter 'G' to choose glycine, 'B' to choose N-butyl, or 'G B' to choose to branch: You picked  G
+Current number of sequences: 1
+Evaluating position 5 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 6 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 7 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 8 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 9 for sequence  1
+Attempting single residue matching.
+More than one sequence match was found. The following are the options:
+Species G+Na has difference -0.1317 picked peak: 1559.7913 target peak: 1559.923
+Species G+Na has difference -0.1197 picked peak: 1559.8033 target peak: 1559.923
+Species G+Na has difference -0.0993 picked peak: 1559.8237 target peak: 1559.923
+Species G+Na has difference -0.1184 picked peak: 1559.8046 target peak: 1559.923
+Species G+Na has difference -0.1281 picked peak: 1559.7949 target peak: 1559.923
+Species B+Na has difference -0.1752 picked peak: 1615.8104 target peak: 1615.9856
+Enter 'G' to choose glycine, 'B' to choose N-butyl, or 'G B' to choose to branch: You picked  G
+Current number of sequences: 1
+Evaluating position 10 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 11 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 12 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 13 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 14 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 15 for sequence  1
+Attempting single residue matching.
+More than one sequence match was found. The following are the options:
+Species G+Na has difference -0.1147 picked peak: 2014.0623 target peak: 2014.177
+Species G+Na has difference -0.1262 picked peak: 2014.0508 target peak: 2014.177
+Species G+Na has difference -0.062 picked peak: 2014.115 target peak: 2014.177
+Species G+Na has difference -0.1557 picked peak: 2014.0212 target peak: 2014.177
+Species G+Na has difference -0.134 picked peak: 2014.043 target peak: 2014.177
+Species B+Na has difference -0.2069 picked peak: 2070.0327 target peak: 2070.2396
+Enter 'G' to choose glycine, 'B' to choose N-butyl, or 'G B' to choose to branch: You picked  G
+Current number of sequences: 1
+Evaluating position 16 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 17 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 18 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 19 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Evaluating position 20 for sequence  1
+Attempting single residue matching.
+Single matching success.
+
+Current number of sequences: 1
+Sequence matching complete.
+Exporting data to excel in directory /Users/alanwang/Documents/Lab Work/peptoid-sequence-tools
+Evaluation complete.
