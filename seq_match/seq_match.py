@@ -47,22 +47,25 @@ def extract_data_from_folder(folder_name):
 
 
 # Helper Matching Functions
-# {Short function description here}
+
+# This function is called when a single match cannot be found. The two subsequent positions are guessed, resulting in matches
+# either for gly+gly addition, nBu+nBu or gly+nBu / nBu-gly. In the case of gly+nBu or nBu-gly, the order of the two monomers 
+# cannot be determined and the species is identified as G or B for both positions. 
+# In the case of gly+gly or nBu+nBu, both positions are simultaneously assigned. 
+
 def match_two(curr_sum, peaks, i):
     two_diffs = []
     species = [G + G + Na, G + B + Na, B + B + Na]
-    # {Why are there duplicate lists?}
-    species_label1 = ['G+Na', 'G or B', 'B+Na']
-    species_label2 = ['G+Na', 'G or B', 'B+Na']
 
-    # {More descriptive loop variable names}
-    for f in range(len(species)):
+    species_label = ['G+Na', 'G or B', 'B+Na']
+
+    for sp in range(len(species)):
         for p in peaks:
-            test_diff = p - curr_sum - species[f]
-            if abs(test_diff) <= d * ((curr_sum + species[f]) / 1E6):
+            test_diff = p - curr_sum - species[sp]
+            if abs(test_diff) <= d * ((curr_sum + species[sp]) / 1E6):
                 match1 = {
                     "position": i + 1,
-                    "species": species_label1[f],
+                    "species": species_label[sp],
                     "difference": test_diff,
                     "target peak": 0,
                     "picked peak": 0,
@@ -71,36 +74,38 @@ def match_two(curr_sum, peaks, i):
 
                 match2 = {
                     "position": i + 2,
-                    "species": species_label2[f],
+                    "species": species_label[sp],
                     "difference": test_diff,
-                    "target peak": curr_sum + species[f],
+                    "target peak": curr_sum + species[sp],
                     "picked peak": p,
-                    "no adduct": curr_sum + species[f] - Na
+                    "no adduct": curr_sum + species[sp] - Na
                 }
 
                 two_diffs.append(match1)
                 two_diffs.append(match2)
     return two_diffs
 
-# {Short function description here}
+# This function is called to search for any peak corresponding to the addition of a glycine or N-butyl glycine
+# fragment that is a sodium adduct. It calculates the masses of gly+Na and Nbu+Na added to the current chain and
+# searches for those corresponding masses in the peak list.
+
 def match_one(curr_sum, peaks, i):
     diffs = []
 
     species_label = ['G+Na', 'B+Na']
     species = [G + Na, B + Na]
 
-    # {more descriptive loop variable names}
-    for f in range(len(species)):
+    for sp in range(len(species)):
         for p in peaks:
-            test_diff = p - curr_sum - species[f]
-            if abs(test_diff) <= d * ((curr_sum + species[f]) / 1E6):
+            test_diff = p - curr_sum - species[sp]
+            if abs(test_diff) <= d * ((curr_sum + species[sp]) / 1E6):
                 match = {
                     "position": i + 1,
-                    "species": species_label[f],
+                    "species": species_label[sp],
                     "difference": test_diff,
-                    "target peak": curr_sum + species[f],
+                    "target peak": curr_sum + species[sp],
                     "picked peak": p,
-                    "no adduct": curr_sum + species[f] - Na
+                    "no adduct": curr_sum + species[sp] - Na
                 }
                 diffs.append(match)
     return diffs
@@ -122,23 +127,21 @@ def match_peaks(peaks):
         "no adduct": L
     })
 
-    # {more descriptive variable name "monomer"?}
-    for i in range(N):  # iterate over all positions in chain
-        tot = len(Y_ions)
+    for monomer in range(N):  # iterate over all positions in chain
+        total = len(Y_ions)
         new_lists = []
         remove_nums = []
 
-        # {More descriptive variable name}
-        for it in range(tot):
-            if Y_ions[it][-1]["position"] == i:
-                print("Evaluating position", i + 1, "for sequence ", it + 1)
+        for seq in range(total):
+            if Y_ions[seq][-1]["position"] == monomer:
+                print("Evaluating position", monomer + 1, "for sequence ", seq + 1)
 
                 # print("Evaluating sequence ", it+1)
-                curr_sum = Y_ions[it][-1]['no adduct']
+                curr_sum = Y_ions[seq][-1]['no adduct']
 
                 # compare each predicted Y ion + adducts to individual peak - guessing single matching
                 print("Attempting single residue matching.")
-                diffs = match_one(curr_sum, peaks, i)
+                diffs = match_one(curr_sum, peaks, monomer)
 
                 # filter diffs list
                 diffs_sorted = sorted(diffs, key=lambda d: d['difference'])
@@ -146,12 +149,12 @@ def match_peaks(peaks):
 
                 # guess two
                 if len(diffs_unique) == 0:
-                    diffs_mult = match_two(curr_sum, peaks, i)
+                    diffs_mult = match_two(curr_sum, peaks, monomer)
 
                     if len(diffs_mult) != 0:
                         print("Single residuce matching failed. Pair residue matching was success.\n")
-                        Y_ions[it].append(diffs_mult[0])
-                        Y_ions[it].append(diffs_mult[1])
+                        Y_ions[seq].append(diffs_mult[0])
+                        Y_ions[seq].append(diffs_mult[1])
                     else:
                         print("Single residue matching failed. Pair residue matching failed. The branch is dead.\n")
 
@@ -162,15 +165,14 @@ def match_peaks(peaks):
 
                     print("More than one sequence match was found. The following are the options:")
 
-                    # {More descriptive loop variable name}
-                    for jj in range(len(diffs)):
-                        print("Species", diffs[jj]["species"], "has difference", round(diffs[jj]["difference"], 4),
-                              "picked peak:", round(diffs[jj]["picked peak"], 4), "target peak:",
-                              round(diffs[jj]["target peak"], 4))
-                        if diffs[jj]["species"] == "G+Na":
-                            G_candidates.append(diffs[jj])
-                        elif diffs[jj]["species"] == "B+Na":
-                            B_candidates.append(diffs[jj])
+                    for candidate in range(len(diffs)):
+                        print("Species", diffs[candidate]["species"], "has difference", round(diffs[candidate]["difference"], 4),
+                              "picked peak:", round(diffs[candidate]["picked peak"], 4), "target peak:",
+                              round(diffs[candidate]["target peak"], 4))
+                        if diffs[candidate]["species"] == "G+Na":
+                            G_candidates.append(diffs[candidate])
+                        elif diffs[candidate]["species"] == "B+Na":
+                            B_candidates.append(diffs[candidate])
 
                     expected_inputs = ['G', 'B', 'G B']
                     while True:
@@ -183,28 +185,26 @@ def match_peaks(peaks):
                     minG = min(G_candidates, key=lambda x: x['difference'])
                     minB = min(B_candidates, key=lambda x: x['difference'])
 
-                    copy_y = Y_ions[it].copy()
+                    copy_y = Y_ions[seq].copy()
 
-                    # {More descriptive variable name}
-                    for kk in range(len(picked)):
-                        if picked[kk] == "G":  # assign G as the next position with the smallest ppm difference
+                    for chosen_seq in range(len(picked)):
+                        if picked[chosen_seq] == "G":  # assign G as the next position with the smallest ppm difference
                             new_lists.append(copy_y + [minG])
-                            print("You picked ", picked[kk])
+                            print("You picked ", picked[chosen_seq])
                         else:  # assign B as the next position with the smallest ppm difference
                             new_lists.append(copy_y + [minB])
-                            print("You picked ", picked[kk])
+                            print("You picked ", picked[chosen_seq])
 
-                    remove_nums.append(it)
+                    remove_nums.append(seq)
 
                 # assign the only choice
                 else:
                     print("Single matching success.\n")
-                    Y_ions[it].append(diffs_unique[0])
+                    Y_ions[seq].append(diffs_unique[0])
 
         # remove duplicate sequences
-        # {More descriptive variable name}
-        for j in sorted(remove_nums, reverse=True):
-            Y_ions.remove(Y_ions[j])
+        for remove_idx in sorted(remove_nums, reverse=True):
+            Y_ions.remove(Y_ions[remove_idx])
 
         Y_ions += new_lists
 
