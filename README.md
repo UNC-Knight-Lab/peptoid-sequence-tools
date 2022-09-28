@@ -1,7 +1,7 @@
 # peptoid-sequence-tools
 
 ## Description
-This Python package was developed by the Knight Lab at UNC Chapel Hill to analyze the sequence of a peptoid from mass peaks in a MALDI-TOF spectrum. {more description}
+This Python package was developed by the Knight Lab at UNC Chapel Hill to analyze the sequence of a peptoid composed of glycine or N-butylglycine monomers from mass peaks in a MALDI TOF-TOF spectrum. 
 
 ## Installation Instructions
 A version of Python >= 3.7 is required to use this package. We recommend using [Anaconda](https://www.anaconda.com) to install Python for those new to Python.
@@ -25,10 +25,10 @@ The peptoid sequence matching tool can be run as a Python function or from the c
 The script may prompt the user to make decisions in a tie-breaker scenario.
 
 The input folder is the folder where your peak data is stored as `.txt` files. All `.txt` files in the folder will be combined and used as input.
-This allows for multiple spectra of the same sample to be combined for better signal.
+This allows for multiple spectra of the same sample to be combined for better signal to noise.
 Example peak data is included in this repository.
 
-Data will be output as a single Excel worksheet in the output folder.
+Data will be output as a single Excel workbook in the output folder. In the case that user input was required, multiple candidate sequences are exported to different worksheets in the same Excel workbook.
 
 ### To run from terminal:
     
