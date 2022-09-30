@@ -29,7 +29,7 @@ This allows for multiple spectra of the same sample to be combined for better si
 Example peak data is included in this repository.
 
 Data will be output as a single Excel workbook in the output folder. In the case that user input was required, multiple candidate sequences are exported to different worksheets in the same Excel workbook.
-An example output Excel workbook is included in this repository as well as a sample log console output.
+An example output Excel workbook is included in this repository as well as a sample console log output.
 
 ### To run from terminal:
     
